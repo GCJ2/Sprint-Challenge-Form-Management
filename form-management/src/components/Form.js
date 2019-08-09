@@ -7,9 +7,10 @@ import axios from 'axios'
 const UserForm = ({ values, handleChange, errors, touched, status }) => {
 
   const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState()
+  const [dbUsers, setDbUsers] = useState()
   console.log('status', status);
   console.log('users', users);
+  console.log('dbUsers', dbUsers);
 
   useEffect(() => {
     if (status) {
@@ -17,6 +18,19 @@ const UserForm = ({ values, handleChange, errors, touched, status }) => {
     }
   }, [status])
 
+  useEffect(() => {
+    axios
+    .get('http://localhost:5000/api/restricted/data')
+    .then(res => {
+      console.log('res.data', res.data);
+      setDbUsers(res.data)
+    })
+    .catch(err => console.log(err.response));
+  }, [])
+
+  if (dbUsers === undefined) {
+      return null
+  }
 
   return(
     <div className="form-div">
@@ -38,6 +52,11 @@ const UserForm = ({ values, handleChange, errors, touched, status }) => {
         {users.map((user, i) => (
         <p key={i}>{user.username}</p>
       ))}
+        {dbUsers.map((user, i) => (
+        <p key={i}>{user.name}</p>
+      ))}
+
+
     </div>
     )
 }
@@ -60,7 +79,7 @@ const FormikUserForm = withFormik({
       .post('http://localhost:5000/api/register', values)
       .then(res => {
         console.log(res);
-        // setStatus(res.data)
+        setStatus(res.data)
       })
       .catch(err => console.log(err.response));
   }
