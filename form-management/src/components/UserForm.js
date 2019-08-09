@@ -4,19 +4,17 @@ import * as Yup from 'yup';
 import axios from 'axios'
 import CurrentUsers from './CurrentUsers'
 import CurrentUsersDisplay from './CurrentUsersDisplay'
-
 import NewUsers from './NewUsers'
 import { Route } from "react-router-dom";
 
-const UserForm = ({ values, handleChange, errors, touched, status }) => {
+const UserForm = ({currentUsers, oldUsers, setOldUsers, values, handleChange, errors, touched, status }) => {
 
-
+  console.log('currentUsers', currentUsers)
+  console.log('oldUsers', oldUsers);
 
   const [users, setUsers] = useState([]);
   const [dbUsers, setDbUsers] = useState()
-  // console.log('status', status);
-  // console.log('users', users);
-  // console.log('dbUsers', dbUsers);
+  console.log('dbUsers', dbUsers);
 
 
   useEffect(() => {
