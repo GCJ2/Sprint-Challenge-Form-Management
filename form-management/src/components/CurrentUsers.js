@@ -7,7 +7,7 @@ const CurrentUsers = (props) => {
   console.log('current users props', props);
   return(
     <div>
-      <p>{props.name}</p>
+      <p className="user">{props.name}</p>
     </div>
     )
   }

@@ -40,15 +40,19 @@ const UserForm = ({ values, handleChange, errors, touched, status }) => {
         <Form className="form-wrapper">
           <div>
             {touched.username && errors.username && <p>{errors.username}</p>}
-          <Field type='username' name='username' placeholder='User Name' />
+          <Field
+            className="form-input" type='username' name='username' placeholder='User Name' />
           </div>
           <div>
             {touched.password && errors.password && <p>{errors.password}</p>}
-          <Field type='password' name='password' placeholder='Password' />
+          <Field
+            className="form-input" type='password' name='password' placeholder='Password' />
           </div>
-          <button type="submit">Submit</button>
+          <button
+            className="form-button" type="submit"
+            >Submit</button>
         </Form>
-      <div className="new-useres">
+      <div className="users">
         <h2>New Users</h2>
         {users.map((user, i) => (
           <NewUsers
@@ -56,7 +60,7 @@ const UserForm = ({ values, handleChange, errors, touched, status }) => {
             name= {user.username} />
           ))}
       </div>
-      <div className="current-users">
+      <div className="users">
         <h2>Current Users</h2>
         {dbUsers.map((user, i) => (
           <CurrentUsers
