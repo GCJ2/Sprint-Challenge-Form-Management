@@ -8,8 +8,9 @@ describe('<Form />', () => {
   it('renders without creashing', () => {
     render(<UserForm />);
   });
-  it('has a submit button', () => {
-    const userForm = render(<UserForm />);
-    userForm.getByText(/Submit/i);
-  });
+  it('has working button', () => {
+    const form = render(<UserForm />);
+    const submitBtn = getByText(/^Submit$/i)
+    fireEvent.click(submitBtn)
+  })
 });
