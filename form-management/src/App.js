@@ -1,14 +1,29 @@
 import React from 'react';
-import UserForm from "./components/Form"
+import Welcome from "./components/Welcome"
 
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <UserForm />
-    </div>
-  );
+// function App() {
+//   return (
+//     <div className="App">
+//       <UserForm />
+//     </div>
+//   );
+// }
+//
+
+class App extends React.Component {
+  constructor() {
+    super();
+  }
+  render() {
+    return (
+      <div className="App">
+        <Welcome />
+
+      </div>
+    )
+  }
 }
 
 export default App;

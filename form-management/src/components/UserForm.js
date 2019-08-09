@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios'
+import CurrentUsers from './CurrentUsers'
+import NewUsers from './NewUsers'
 
 
 const UserForm = ({ values, handleChange, errors, touched, status }) => {
 
   const [users, setUsers] = useState([]);
   const [dbUsers, setDbUsers] = useState()
-  console.log('status', status);
-  console.log('users', users);
-  console.log('dbUsers', dbUsers);
+  // console.log('status', status);
+  // console.log('users', users);
+  // console.log('dbUsers', dbUsers);
 
   useEffect(() => {
     if (status) {
@@ -22,7 +24,7 @@ const UserForm = ({ values, handleChange, errors, touched, status }) => {
     axios
     .get('http://localhost:5000/api/restricted/data')
     .then(res => {
-      console.log('res.data', res.data);
+      // console.log('res.data', res.data);
       setDbUsers(res.data)
     })
     .catch(err => console.log(err.response));
@@ -40,23 +42,28 @@ const UserForm = ({ values, handleChange, errors, touched, status }) => {
             {touched.username && errors.username && <p>{errors.username}</p>}
           <Field type='username' name='username' placeholder='User Name' />
           </div>
-
           <div>
             {touched.password && errors.password && <p>{errors.password}</p>}
           <Field type='password' name='password' placeholder='Password' />
           </div>
-
           <button type="submit">Submit</button>
         </Form>
-        <h2>Registered Users</h2>
+      <div className="new-useres">
+        <h2>New Users</h2>
         {users.map((user, i) => (
-        <p key={i}>{user.username}</p>
-      ))}
+          <NewUsers
+            key={i}
+            name= {user.username} />
+          ))}
+      </div>
+      <div className="current-users">
+        <h2>Current Users</h2>
         {dbUsers.map((user, i) => (
-        <p key={i}>{user.name}</p>
-      ))}
-
-
+          <CurrentUsers
+            key={i}
+            name= {user.name} />
+          ))}
+      </div>
     </div>
     )
 }
@@ -73,12 +80,12 @@ const FormikUserForm = withFormik({
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Please enter a valid password'),
   }),
   handleSubmit(values, { setStatus, resetForm, setErrors, setSubmitting }) {
-    console.log(values);
+    // console.log(values);
     setStatus(values)
     axios
       .post('http://localhost:5000/api/register', values)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setStatus(res.data)
       })
       .catch(err => console.log(err.response));
