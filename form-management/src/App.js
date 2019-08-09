@@ -1,5 +1,8 @@
 import React from 'react';
 import Welcome from "./components/Welcome"
+import { Route } from 'react-router-dom';
+import UserForm from "./components/UserForm"
+import CurrentUsersDisplay from "./components/CurrentUsersDisplay"
 
 import './App.css';
 
@@ -19,8 +22,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Welcome />
-
+        <div>
+          <Route path="/" exact component={Welcome} />
+          <Route path="/newuser" exact component={UserForm} />
+          {/* <Route path="/currentusers" exact component={UserForm} /> */}
+        </div>
       </div>
     )
   }

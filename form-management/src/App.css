@@ -33,8 +33,16 @@
 }
 
 .users {
-  border: 1px solid black;
+  border: 5px solid black;
+  margin: 10px;
+  border-radius: 10px;
+}
 
+.users h2 {
+  border: 2px solid black;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .form-input {
